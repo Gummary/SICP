@@ -1,7 +1,7 @@
 (define nil '())
 
 ; Map
-(load "map")
+;(load "map")
 
 ; Filter
 
