@@ -1,3 +1,4 @@
+(define nil '())
 (load "exercise2_38")
 
 

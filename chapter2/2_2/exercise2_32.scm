@@ -3,4 +3,5 @@
       (list '())
       (let ((rest (subsets (cdr s))))
         (append rest (map (lambda (items)
-								(cons (car s) items)) rest)))))								
+			    (cons (car s) items)) 
+			  rest)))))								
