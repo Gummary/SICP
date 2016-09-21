@@ -1,0 +1,31 @@
+(define (install-scheme-number)
+  (define (tag item)
+    (cons 'scheme-number item))
+
+  (define (add-scheme-number x y)
+    (tag (+ x y)))
+  (define (sub-scheme-number x y)
+    (tag (- x y)))
+  (define (div-scheme-number x y)
+    (tag (/ x y)))
+  (define (mul-scheme-number x y)
+    (tag (* x y)))
+
+  (put 'make '(scheme-number)
+       (lambda (x) (tag x)))
+  (put 'add '(scheme-number scheme-number)
+       add-scheme-number)
+  (put 'sub '(scheme-number scheme-number)
+       sub-scheme-number)
+  (put 'div '(scheme-number scheme-number)
+       div-scheme-number)
+  (put 'mul '(scheme-number scheme-number)
+       mul-scheme-number)
+  (put 'equ? '(scheme-number scheme-number)
+       (lambda (x y) (= x y)))
+  'done)
+
+(define (make-scheme-number n)
+  ((get 'make '(scheme-number)) n))
+
+
