@@ -1,0 +1,20 @@
+(define (apply-generic op . args)
+  (let ((type-tags (map type-tag args)))
+    (let ((proc (get op type-tags)))
+      (if proc
+	(apply proc (map content args))
+	(if (= (length args) 2)
+	  (let ((type1 (car type-tags))
+		(type2 (cadr type-tags)))
+	    (if (equal? type1 type2)
+	      (error "No method for these args" (list op type-tags))
+	      (let ((a1 (car args))
+		    (a2 (cadr args)))
+		(let ((a1->a2 (get-coercion type1 type2))
+		      (a2->a1 (get-coercion type2 type1)))
+		  (cond (a1->a2
+			  (apply-generic op (a1->a2 a1) a2))
+			(a2->a1
+			  (apply-generic op (a2->a1 a2) a1))
+			(else (error "No method for these args" (list op type-tags))))))))
+	  (error "No method for these args" (list op type-tags)))))))
