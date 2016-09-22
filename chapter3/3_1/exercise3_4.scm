@@ -1,0 +1,26 @@
+(define (make-account balance passwd)
+  (let ((wrong-time 0))
+    (define (call-the-police amount)
+      'call-the-police)
+
+    (define (withdraw amount)
+      (if (>= balance amount)
+	(begin (set! balance (- balance amount))
+	       balance)
+	(error "Insufficient funds")))
+    (define (deposit amount)
+      (set! balance (+ amount balance))
+      balance)
+    (define (dispatch password m)
+      (if (eq? password passwd)
+	(begin (set! wrong-time 0)
+	       (cond ((eq? m 'withdraw) withdraw)
+		     ((eq? m 'deposit) deposit)
+		     (else (error "Unkonw request -- MAKE-ACCOUNT"
+				  m))))
+	(if (>= wrong-time 2)
+	  call-the-police
+	  (begin (set! wrong-time (+ wrong-time 1))
+		 (error "Passwd is wrong")))))
+    dispatch))
+      
