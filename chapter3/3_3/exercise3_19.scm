@@ -1,0 +1,12 @@
+(define (has-cycle? x)
+   (define (safe-cdr l)
+     (if (piar? l)
+       (cdr l)
+       '()))
+   (define (iter a b)
+     (cond ((null? a) false)
+	   ((null? b) false)
+	   ((eq? a b) true)
+	   ((iter (safe-cdr a) (safe-cdr (safe-cdr b))))))
+   (iter (safe-cdr a) (safe-cdr (safe-cdr b))))
+
