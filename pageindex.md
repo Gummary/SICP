@@ -2,6 +2,40 @@
 layout: default
 title: Blog archive
 ---
+<style type="text/css">
+			.recentcomments a {
+				display: inline !important;
+				padding: 0 !important;
+				margin: 0 !important;
+			}
+			table.recentcommentsavatartop img.avatar, table.recentcommentsavatarend img.avatar {
+				border: 0px;
+				margin: 0;
+			}
+			table.recentcommentsavatartop a, table.recentcommentsavatarend a {
+				border: 0px !important;
+				background-color: transparent !important;
+			}
+			td.recentcommentsavatarend, td.recentcommentsavatartop {
+				padding: 0px 0px 1px 0px;
+				margin: 0px;
+			}
+			td.recentcommentstextend {
+				border: none !important;
+				padding: 0px 0px 2px 10px;
+			}
+			.rtl td.recentcommentstextend {
+				padding: 0px 10px 2px 0px;
+			}
+			td.recentcommentstexttop {
+				border: none;
+				padding: 0px 0px 0px 10px;
+			}
+			.rtl td.recentcommentstexttop {
+				padding: 0px 10px 0px 0px;
+			}
+</style>
+		
 <div class="page-content wc-container">
   <h1>Solutions Index</h1>
   <h1>Chapter 1</h1>
