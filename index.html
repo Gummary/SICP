@@ -34,9 +34,9 @@ layout: default
   		{% endfor %}
 	</div>
   
-      <div calss = "pagination" align="center">
+      <div calss = "pagination" >
         {% if paginator.total_pages > 1 %}
-        <div class="pagination">
+        <div class="pagination" align="center">
           {% if paginator.previous_page %}
             <a href="{{ paginator.previous_page_path | prepend: site.baseurl | replace: '//', '/' }}">&laquo; Prev</a>
           {% else %}
