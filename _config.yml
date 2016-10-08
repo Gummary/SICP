@@ -27,8 +27,8 @@ harmony:
 # Conversion / Build settings 
 markdown:    kramdown
 
-# Permalinks
-permalink:        pretty
+paginate: 5
+
 
 exclude: 
   - CNAME

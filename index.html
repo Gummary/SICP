@@ -3,7 +3,7 @@ layout: default
 ---
 <div id="home" class="page-content wc-container">
 	<div class="posts">
-  		{% for post in site.posts %}
+  		{% for post in paginator.posts %}
   			<div class="post">
     			<h3 class="post-title">
 			      <a href="{{ post.url | prepend: site.baseurl | prepend: site.url }}">
@@ -33,6 +33,21 @@ layout: default
   			</div>
   		{% endfor %}
 	</div>
+  
+      <div calss = "pagination">
+        {% if paginator.previous_page %}
+      <a href="/page{{ paginator.previous_page }}" class="previous">Previous</a>
+        {% else %}
+          <span class="previous">Previous</span>
+        {% endif %}
+        <span class="page_number ">Page: {{ paginator.page }} of {{ paginator.total_pages }}</span>
+        {% if paginator.next_page %}
+          <a href="/page{{ paginator.next_page }}" class="next">Next</a>
+        {% else %}
+          <span class="next ">Next</span>
+        {% endif %}
+      </div>
+
 	<div class="post-footer">
 		<div class="column-full"><a href="{{ '/blog' | prepend: site.baseurl | prepend: site.url }}">Blog archive</a></div>
 	</div>
