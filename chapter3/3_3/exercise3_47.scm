@@ -1,0 +1,46 @@
+(define (make-sempahore n)
+  (let ((count n)
+        (the-mutex (make-mutex)))
+    (define (the-sempahore m)
+      (cond ((eq? m 'acquire)
+             (the-mutex 'acquire)
+             (if (zero? count)
+                 (begin
+                   (the-mutex 'release)
+                   (the-semaphore 'acquire))
+                 (begin
+                   (set! count (- count 1))
+                   (the-mutex 'release))))
+            ((eq? m 'release)
+             (the-mutex 'acquire)
+             (if (= count n)
+                 (the-mutex 'release)
+                 (begin
+                   (set! count (+ count 1))
+                   (the-mutex 'release))))))
+    the-sempahore))
+
+
+(define (make-sempahore n)
+  (let ((count n)
+        (cell (list false)))
+    (define (the-sempahore m)
+      (cond ((eq? m 'acquire)
+             (if (test-and-set! cell)
+                 (the-semaphore 'acquire)
+                 (if (zero? count)
+                     (begin
+		       (clear! cell)
+		       (the-semaphore 'acquire))
+                     (begin
+                       (set! count (- count 1))
+                       (clear! cell)))))
+            ((eq? m 'release)
+             (if (test-and-set! cell)
+                 (the-semaphore 'release)
+                 (if (= count n)
+                     (clear! cell)
+                     (begin
+                       (set! count (+ count 1))
+                       (clear! cell)))))))
+    the-sempahore))
