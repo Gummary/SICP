@@ -3,11 +3,12 @@
       (stream-car s)
       (stream-ref (stream-cdr s) (- n 1))))
 
-(define (stream-map proc s)
-  (if (stream-null? s)
-      the-empty-stream
-      (cons-stream (proc (stream-car s))
-                   (stream-map proc (stream-cdr s)))))
+;(define (stream-map proc s)
+;  (if (stream-null? s)
+;      the-empty-stream
+;      (cons-stream (proc (stream-car s))
+;                   (stream-map proc (stream-cdr s)))))
+
 (define (stream-for-each proc s)
   (if (stream-null? s)
       'done
@@ -20,3 +21,17 @@
       (cons-stream
        low
        (stream-enumerate-interval (+ low 1) high))))
+
+(define (integers-starting-from n)
+  (cons-stream n
+	       (integers-starting-from (+ n 1))))
+
+(define integers
+  (integers-starting-from 1))
+
+(define (add-streams s1 s2)
+  (stream-map + s1 s2))
+
+(define (scale-stream stream factor)
+  (stream-map (lambda (x) (* x factor)) stream))
+
