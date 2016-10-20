@@ -1,0 +1,10 @@
+(load "integral2")
+
+(define (RLC r l c dt)
+  (lambda (vc0 il0)
+    (define vc (integral (delay dvc) vc0 dt))
+    (define dvc (scale-stream (delay il) (- 0 (/ 1 c))))
+    (define il (integral (delay dil) il0 dt))
+    (define dil (add-streams (scale-stream vc (/ 1 l))
+			     (scale-stream il (- 0 (/ r l)))))
+    (cons vc il)))
