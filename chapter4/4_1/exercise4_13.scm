@@ -1,0 +1,12 @@
+(define (make-unbound! var env)
+  (let ((frame (frist-frame env)))
+    (define (scan vars vals)
+      (cond ((null? vars)
+	     (error "Unbound variable -- REMOVE-BINDING-FROM-FRAME!" var))
+	    ((eq? var (car vars))
+	     (set! vars (cdr vars))
+	     (set! vals (cdr vals)))
+	    ((else (scan (cdr vars) (cdr vals))))))
+    (scan (frame-variables frame)
+	  (frame-values frame))))
+
