@@ -1,0 +1,31 @@
+(load "flatmap")
+
+(define (remove x s)
+  (filter (lambda (a) (not (= a x)))
+	  s))
+
+  
+(define (permutation s)
+  (if (null? s)
+    (list '())
+    (flatmap (lambda (x)
+	       (map (lambda (p) (cons x p))
+		    (permutation (remove x s))))
+	     s)))
+
+
+(define (multiple-dwelling)
+  (define (invalid-solution permutation)
+    (let ((baker (car permutation))
+	  (copper (cadr permutation))
+	  (fletcher (caddr permutation))
+	  (miller (cadddr permutation))
+	  (smith (car (cddddr permutation))))
+      (and (not (= baker 5))
+	   (not (= copper 1))
+	   (not (= fletcher 5))
+	   (not (= fletcher 1))
+	   (> miller copper)
+	   (not (= (abs (- smith fletcher)) 1))
+	   (not (= (abs (- fletcher copper)) 1)))))
+  (filter invalid-solution (permutation (list 1 2 3 4 5))))
